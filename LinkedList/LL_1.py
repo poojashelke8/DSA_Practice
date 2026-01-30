@@ -56,7 +56,7 @@ def insert_start(head,val):
     newNode = Node(val)
     newNode.next = head
     return newNode
-
+ 
 def insert_tail(head,val):
     newNode = Node(val)
     if head is None:
