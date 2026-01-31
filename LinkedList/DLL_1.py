@@ -52,6 +52,57 @@ def delete_Tail_DLL(head):
     temp.next = None
     return head
 
+def insert_head(head,val):
+    newNode = Node(val)
+    if head == None:
+        return newNode
+    newNode.next = head
+    head.back = newNode
+    return newNode
+
+def insert_tail(head,val):
+    newNode = Node(val)
+    if head == None:
+        return newNode
+    temp = head
+    while temp.next.next!=None:
+        temp = temp.next
+    temp.next.next = newNode
+    newNode.back = temp
+    return head
+
+def insert_k_ele(head,val,k):
+    newNode= Node(val)
+    if head == None:
+        return None
+    if k == 1:
+        newNode.next = head
+        head.back = newNode
+        return newNode
+    
+    cnt = 1
+    temp = head
+    while temp:
+        if k == cnt:
+            prev = temp.back
+                
+            prev.next = newNode
+            newNode.back = prev
+            newNode.next = temp
+            temp.back = newNode
+           
+        cnt+=1
+        temp = temp.next
+
+    if cnt == k:
+        temp = head
+        while temp.next:
+            temp = temp.next
+        temp.next = newNode
+        newNode.back = temp
+
+    return head
+            
 if __name__ == "__main__":
     arr = [2, 5, 8, 7]
     head = Node(arr[0])
@@ -67,6 +118,15 @@ if __name__ == "__main__":
     head = delete_Tail_DLL(head)
     print_DLL(head)
     head = delete_k_ele(head,2)
+    print_DLL(head)
+    head = insert_head(head,100)
+    print_DLL(head)
+    head = insert_tail(head,500)
+    head = insert_tail(head,650)
+    head  =insert_k_ele(head,1000,4)
+    head  =insert_k_ele(head,5,3)
+    head  =insert_k_ele(head,10,5)
+
     print_DLL(head)
 
     
