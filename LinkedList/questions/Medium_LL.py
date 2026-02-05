@@ -35,6 +35,26 @@ def addOne(head):
 
     return reverse(head)
 
+def add_1_recursive(head):
+    def helper(temp):
+        if temp == None:
+            return 1
+        carry = helper(temp.next)
+        temp.val += carry
+        # temp.val = total%10
+        # return total // 10
+
+        if temp.val < 10:
+            return 0
+        temp.val = 0
+        return 1
+    carry = helper(head)
+    if carry:
+        newNode = ListNode(carry)
+        newNode.next = head
+        head = newNode
+    return head
+
 
 def printList(head):
     while head:
@@ -44,7 +64,7 @@ def printList(head):
 
 
 if __name__ == "__main__":
-    arr = [2, 5, 8, 7]
+    arr = [2, 9, 9, 9,6]
     head = ListNode(arr[0])
     curr = head
     for val in arr[1:]:
@@ -54,7 +74,8 @@ if __name__ == "__main__":
     print("Original Linked List:")
     printList(head)
 
-    head = addOne(head)
+    head = add_1_recursive(head)
+    # addOne(head)
 
     print("After Adding One:")
     printList(head)
